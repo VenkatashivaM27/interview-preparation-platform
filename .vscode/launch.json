@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Backend (Spring Boot dev)",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "com.interviewprep.InterviewPrepApplication",
+      "cwd": "${workspaceFolder}\\backend",
+      "env": {
+        "SPRING_PROFILES_ACTIVE": "dev"
+      },
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Open Frontend (Edge)",
+      "type": "msedge",
+      "request": "launch",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}\\frontend\\src"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Backend + Open Frontend",
+      "configurations": [
+        "Debug Backend (Spring Boot dev)",
+        "Open Frontend (Edge)"
+      ],
+      "preLaunchTask": "Run frontend (Vite)",
+      "stopAll": true
+    }
+  ]
+}

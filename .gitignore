@@ -1,0 +1,28 @@
+# Backend
+backend/target/
+backend/uploads/
+*.jar
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+.vs/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+*.iml
+
+# Env
+.env
+.env.local
+frontend/.env
+
+# OS
+.DS_Store
+Thumbs.db

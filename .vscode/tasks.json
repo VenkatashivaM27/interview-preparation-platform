@@ -1,0 +1,145 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install dependencies",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\install.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Run backend (Spring Boot dev)",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\run-backend.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always"
+      },
+      "problemMatcher": {
+        "owner": "spring-boot",
+        "pattern": [
+          {
+            "regexp": "$^"
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".+",
+          "endsPattern": "Started InterviewPrepApplication"
+        }
+      }
+    },
+    {
+      "label": "Run frontend (Vite)",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}\\scripts\\run-frontend.ps1"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "reveal": "always"
+      },
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": [
+          {
+            "regexp": "$^"
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".+",
+          "endsPattern": "Local:\\s+http://localhost:5173/"
+        }
+      }
+    },
+    {
+      "label": "Run app (backend + frontend)",
+      "dependsOn": [
+        "Run backend (Spring Boot dev)",
+        "Run frontend (Vite)"
+      ],
+      "dependsOrder": "parallel",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build backend",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& '${workspaceFolder}\\tools\\apache-maven-3.9.6\\bin\\mvn.cmd' clean compile -DskipTests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}\\backend"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build frontend",
+      "type": "shell",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& '${workspaceFolder}\\tools\\node-v20.18.0-win-x64\\npm.cmd' run build"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}\\frontend"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build app",
+      "dependsOn": [
+        "Build backend",
+        "Build frontend"
+      ],
+      "dependsOrder": "sequence",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

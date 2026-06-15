@@ -1,0 +1,11 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.console": "integratedTerminal",
+  "java.import.maven.enabled": true,
+  "npm.packageManager": "npm",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "files.exclude": {
+    "**/backend/target": true,
+    "**/frontend/node_modules": true
+  }
+}
